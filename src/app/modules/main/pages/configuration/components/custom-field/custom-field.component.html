@@ -1,0 +1,913 @@
+<div id="cdkk-step-content-0-0" class="grid-container px-12" style="grid-gap: 25px;">
+
+  <app-card-container-one [HeaderTextLeft]="'New Fields'" [HeaderTextRight]="'+ Add New'" (onClicked)="resetForm()" [optionTemplate]="createTemplate">
+  </app-card-container-one>
+
+  <app-card-container-two [HeaderTextLeft]="'Created Fields'" [optionTemplate]="viewTemplate">
+  </app-card-container-two>
+
+  <!-- <div class="border-grey-1 border-radius-8">
+    <div class="grid-container" style="padding: 4% 6% 2% 6%;">
+      <div style="
+      padding: 10px;">
+        <h2 class="margin-auto text-left">Choose from list and add to narrration</h2>
+
+      </div>
+      <div class="">
+        <button class="margin-auto text-red-500 p-sm-3 bg-white border-radius-1 border-red-1 float-right"
+          (click)="resetForm()">
+          + Add New
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <hr class="m-0">
+
+
+
+      <form #jsonForm="ngForm" class="py-3 px-4-5 customForm">
+        <span class="mt-2" for="fieldName">Enter Name</span>
+        <mat-form-field appearance="outline">
+          <input matInput type="text" [(ngModel)]="jsonArray.fieldName" [ngModelOptions]="{standalone: true}" id="fieldName" name="fieldName" required>
+        </mat-form-field>
+
+        <span>Enter Label</span>
+        <mat-form-field appearance="outline">
+          <input matInput type="text" [(ngModel)]="jsonArray.label" [ngModelOptions]="{standalone: true}" required>
+        </mat-form-field>
+
+        <span>Select Field Type</span>
+        <mat-form-field appearance="outline">
+          <mat-select [(ngModel)]="jsonArray.fieldType" [ngModelOptions]="{standalone: true}"
+            (selectionChange)="getFieldTypeValue($event)" [disabled]="disabledFieldValue" required>
+            <mat-option *ngFor="let field of fieldType" value="{{field.value}}">
+              {{field.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Select Validation</span>
+        <mat-form-field appearance="outline">
+          <mat-select [(ngModel)]="jsonArray.validation" [ngModelOptions]="{standalone: true}"
+            [disabled]="disabledValidation" (selectionChange)="getValidationTypeValue($event)">
+            <mat-option value="custom" (click)="openCustom(customContent)"> CUSTOM </mat-option>
+            <mat-option value="api" (click)="openVal(validateContent)"> API </mat-option>
+            <mat-option value="none"> NONE </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Select Triggers/Events</span>
+        <mat-form-field appearance="outline">
+
+          <mat-select [(ngModel)]="jsonArray.trigger" [ngModelOptions]="{standalone: true}"
+            (selectionChange)="getTriggers($event)" [disabled]="disabledTriggerValue">
+            <mat-option value="api" (click)="openTrig(triggerContent)"> API</mat-option>
+            <mat-option value="none"> NONE</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Select Dependent Fields</span>
+        <mat-form-field appearance="outline">
+
+          <mat-select [(ngModel)]="jsonArray.dependentFields" [ngModelOptions]="{standalone: true}"
+            [disabled]="disabledDependentFieldsValue">
+            <mat-option value="dependent" (click)="openDepen(dependentContent)"> DEPENDENT FIELDS</mat-option>
+            <mat-option value="none"> NONE</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Select Data Source</span>
+        <mat-form-field appearance="outline">
+
+          <mat-select [(ngModel)]="jsonArray.dataSource" [ngModelOptions]="{standalone: true}"
+            [disabled]="disabledDataSourceValue">
+            <mat-option value="api" (click)="openData(dataContent)"> API</mat-option>
+            <mat-option value="gender"> GENDER</mat-option>
+            <mat-option value="boolean"> BOOLEAN</mat-option>
+            <mat-option value="none"> NONE</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Select Data Type</span>
+        <mat-form-field appearance="outline">
+
+          <mat-select [(ngModel)]="jsonArray.dataType" [ngModelOptions]="{standalone: true}"
+            [disabled]="disabledDataType">
+            <mat-option value="alphanumeric"> ALPHANUMERIC </mat-option>
+            <mat-option value="numeric"> NUMERIC </mat-option>
+            <mat-option value="decimal"> DECIMAL </mat-option>
+            <mat-option value="none"> NONE </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <span>Enter Tag</span>
+        <mat-form-field appearance="outline">
+          <input matInput type="text" [(ngModel)]="jsonArray.tag" placeholder="Enter Desired Tag"
+            [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+
+        <h4>Choose Property</h4>
+        <ul class="list-style-none" style="padding-left: 0;">
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.required" [ngModelOptions]="{standalone: true}"
+              [checked]="reqChecked$ | async" (change)="toggleRequired($event)" class="me-2"> Required</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.readonly" [ngModelOptions]="{standalone: true}"
+              [checked]="redChecked$ | async" (change)="toggleReadonly($event)" class="me-2">Read Only</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.password" [ngModelOptions]="{standalone: true}"
+              [checked]="pasChecked$ | async" (change)="togglePassword($event)" class="me-2">Password</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.hidden" [ngModelOptions]="{standalone: true}"
+              [checked]="hidChecked$ | async" (change)="toggleHidden($event)">Hidden</mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.amount" [ngModelOptions]="{standalone: true}"
+              [checked]="amountChecked$ | async" (change)="toggleAmount($event)">Amount Field</mat-checkbox>
+          </li>
+        </ul>
+
+        <button mat-flat-button class="w-100 no-border text-white text-button-red border-radius-1" type="button" *ngIf="create" (click)="getJsonValue()" style="font-size: 1.2rem;" [disabled]="!jsonForm.form.valid">
+          <span>Create Field</span>
+          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+
+        <button mat-raised-button class="w-100 no-border text-white text-button-red border-radius-1" type="button" *ngIf="update" (click)="updateJsonValue()" style="font-size: 1.2rem;">
+          <span>Update Field</span>
+          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+      </form>
+
+    </div>
+
+    <ng-template #customContent let-modal>
+      <div class="modal-header modal-headers">
+        <h4 class="modal-title">Select Regex Validation Pattern Options</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeCustom()"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-style-none"  style="padding: 0 3rem;">
+          <li>
+            <mat-checkbox [(ngModel)]="jsonArray.custom.email" [ngModelOptions]="{standalone: true}"
+              (change)="getEmailVal($event)"> Email </mat-checkbox>
+          </li>
+          <li>
+            <mat-checkbox (change)="getMinVal($event)"> Minlength Validation </mat-checkbox>
+          </li>
+          <mat-form-field appearance="outline" class="mt-2" *ngIf="showMin">
+            <mat-label>Enter Minlength</mat-label>
+            <input matInput type="number" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.max.minlength"
+              [ngModelOptions]="{standalone: true}" [disabled]="disabledMinlength" [hidden]="hiddenMinlength">
+          </mat-form-field>
+          <li>
+            <mat-checkbox (change)="getMaxVal($event)"> Maxlength Validation </mat-checkbox>
+          </li>
+          <mat-form-field appearance="outline" class="mt-2" *ngIf="showMax">
+            <mat-label>Enter Maxlength</mat-label>
+            <input matInput type="number" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.max.maxlength"
+              [ngModelOptions]="{standalone: true}" [disabled]="disabledMaxlength" [hidden]="hiddenMaxlength">
+          </mat-form-field>
+          <li>
+            <mat-checkbox (change)="getRegVal($event)"> Provide Regex </mat-checkbox>
+          </li>
+          <mat-form-field appearance="outline" class="mt-2" *ngIf="showReg">
+            <mat-label>Enter Regex</mat-label>
+            <input matInput type="text" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.others"
+              [ngModelOptions]="{standalone: true}" [disabled]="disabledRegex" [hidden]="hiddenRegex">
+          </mat-form-field>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="validateCustom()">Submit</button>
+      </div>
+    </ng-template>
+
+    <ng-template #validateContent let-modal>
+      <div class="modal-header modal-headers">
+        <h4 class="modal-title">
+          Provide the Necessary Validation API
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeValidation()"></button>
+      </div>
+      <div class="modal-body">
+          <mat-label>Enter URL</mat-label>
+        <mat-form-field appearance="outline" class="mt-2">
+          <input matInput type="url" (change)="getValidationUrl($event)"
+            [(ngModel)]="jsonArray.validationDetails.validationUrl" [ngModelOptions]="{standalone: true}">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+        <mat-label>Enter Validation Request</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea matInput [(ngModel)]="jsonArray.validationDetails.validationRequest"
+            [ngModelOptions]="{standalone: true}" (change)="getValRequest($event)"
+            placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+        <mat-label>Enter Validation Response</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea matInput [(ngModel)]="jsonArray.validationDetails.validationResponse"
+            [ngModelOptions]="{standalone: true}" (change)="getValResponse($event)"
+            placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="validateAPI()"> Submit </button>
+      </div>
+    </ng-template>
+
+    <ng-template #triggerContent let-modal>
+      <div class="modal-header modal-headers">
+        <h4 class="modal-title">Provide the Necessary Trigger/Events</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeTrigger()"></button>
+      </div>
+      <div class="modal-body">
+        <mat-label>Enter URL</mat-label>
+        <mat-form-field appearance="outline" class="mt-2">
+          <input matInput type="url"
+            ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+            (change)="getTriggerUrl($event)" [(ngModel)]="jsonArray.triggerDetails.triggerUrl"
+            [ngModelOptions]="{standalone: true}">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+        <div
+          *ngIf="jsonArray.triggerDetails.triggerUrl.errors?.urlPattern || jsonArray.triggerDetails.triggerUrl.errors?.required">
+          URL not Valid
+        </div>
+
+        <mat-label>Enter Trigger Request</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea matInput [(ngModel)]="jsonArray.triggerDetails.triggerRequest" [ngModelOptions]="{standalone: true}"
+            (change)="getTriggerRequest($event)" placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+
+        <mat-label>Enter Trigger Response</mat-label>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea matInput [(ngModel)]="jsonArray.triggerDetails.triggerResponse"
+            [ngModelOptions]="{standalone: true}" (change)="getTriggerResponse($event)"
+            placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="validateTrigger()">Submit</button>
+      </div>
+    </ng-template>
+
+    <ng-template #dependentContent let-modal>
+      <div class="modal-header modal-headers">
+        <h4 class="modal-title">
+          Select Action for this Custom Field
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeDependentFields()"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="grid-item">
+
+            <div class="">
+              <div class="">
+                <h4>FIELD NAMES</h4>
+                <ol *ngFor="let field of dependentFields" style="padding: 0">
+                  <mat-checkbox class="mb-2" [(ngModel)]="field.value"
+                  [name]="field.fieldName"
+                  [value]="field.value"
+                  (change)="checkboxValue(field, $event)">
+                  {{field.label}}
+                  </mat-checkbox>
+                  <div *ngIf="field.value">
+                    <mat-radio-group class="border-radius-1 border-grey-1" style="padding: 5px 5px 8px 5px;
+                    margin: 7% 0px;">
+                      <mat-radio-button class="me-1" *ngFor="let option of radioOptions"
+                      [name]="option.name"
+                      [value]="option.value"
+                      (change)="getRadio(option, $event, field.fieldName)">
+                          {{option.displayName}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    </div>
+
+                </ol>
+              </div>
+
+            </div>
+            <h4 *ngIf="checklist">
+              No Dependent Fields Created Yet
+            </h4>
+          </div>
+        </div>
+        <button type="button" class="w-100 no-border text-white text-button-red border-radius-1 p-3 mt-2" (click)="validateDependentFields()">
+          Submit
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #dataContent let-modal>
+      <div class="modal-header modal-headers">
+        <h4 class="modal-title">Provide the Necessary DataSource</h4>
+
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeContent()"></button>
+      </div>
+      <div class="modal-body">
+
+        <mat-label>Enter Data Source URL</mat-label>
+        <mat-form-field appearance="outline" class="mt-2">
+          <input matInput type="text" (change)="getDataUrl($event)"
+            [(ngModel)]="jsonArray.dataSourceDetails.dataSourceUrl" [ngModelOptions]="{standalone: true}">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+
+        <mat-label>Enter Data Request</mat-label>
+        <mat-form-field appearance="outline" class="w-100 mt-2">
+          <textarea matInput [(ngModel)]="jsonArray.dataSourceDetails.dataSourceRequest"
+            [ngModelOptions]="{standalone: true}" (change)="getDataRequest($event)"
+            placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+
+        <mat-label>Enter Data Response</mat-label>
+        <mat-form-field appearance="outline" class="w-100 mt-2">
+          <textarea matInput [(ngModel)]="jsonArray.dataSourceDetails.dataSourceResponse"
+            [ngModelOptions]="{standalone: true}" (change)="getDataResponse($event)"
+            placeholder="{Ex. It makes me feel...}"></textarea>
+        </mat-form-field>
+
+
+        <button type="button" class="w-100 no-border text-white text-button-red border-radius-1 p-3 mt-2" (click)="validateDependentFields()">
+          Submit
+        </button>
+      </div>
+    </ng-template>
+
+  </div> -->
+
+  <!-- <div class="border-radius-8" style="border: 4px solid #6200EE;">
+    <div class="grid-container created-field-grid" style="padding: 4% 6% 2% 6%;">
+      <div class="grid-container" style="
+      padding: 10px; grid-template-columns: 85% 15%;">
+        <h2 class="margin-auto text-left text-blue">Created Fields</h2>
+
+      </div>
+    </div>
+
+    <div>
+      <hr class="m-0">
+
+      <form [formGroup]="tellerForm" class="p-3 customForm">
+
+        <div class="">
+          <div *ngIf="number < 1" class="text-center translateY-25 font-family-name font-normal text-xl text-gray-500">
+            {{fieldMessage}}
+          </div>
+
+          <div class="col-md-12 px-4-5" *ngFor="let control of storageData" style="
+          display: grid; grid-template-columns: 90% 10%;">
+            <ng-container [ngSwitch]="control.fieldType">
+              <ng-container *ngSwitchCase="'text'" class="" [class]="control?.fieldName" class="px-3">
+                <div>
+                  <span>{{control.label}}</span>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" [formControlName]="control?.fieldName" class="form-control">
+                  </mat-form-field>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'date'" class="new-grid-container" [class]="control?.fieldName" class="px-3">
+                <div>
+                  <span>{{control.label}}</span>
+                  <mat-form-field appearance="outline">
+                    <input matInput [formControlName]="control?.fieldName" class="form-control" [matDatepicker]="dp3">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="dp3">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #dp3 startView="year" [startAt]="startDate" disabled="false">
+                    </mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'dropdown'" class="new-grid-container" [class]="control?.fieldName"
+                class="px-3">
+                <div>
+                  <span>{{control.label}}</span>
+
+                  <mat-form-field appearance="outline">
+                    <mat-select [formControlName]="control?.fieldName" class="form-control my-select"
+                      (selectionChange)="getSelectValue($event)">
+                      <mat-option value="-1">Select</mat-option>
+                      <mat-option *ngFor="let val of control.value" [value]="val.id">{{val.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'checkbox'" class="new-grid-container" [class]="control?.fieldName"
+                class="px-3">
+                <div>
+                  <span>{{control.label}}</span>
+                  <p>
+                    <mat-checkbox *ngFor="let val of control.value.split(',')" [formControlName]="control?.fieldName"
+                      class="form-control" name="control.value" value="{{val}}">
+                      {{val}}
+                    </mat-checkbox>
+                  </p>
+                </div>
+              </ng-container>
+            </ng-container>
+            <div style="margin: auto 0;">
+              <button mat-button [matMenuTriggerFor]="belowMenu" style="border: 0; background: none">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #belowMenu="matMenu">
+                <button mat-menu-item (click)="editField(control)">
+                  Edit
+                </button>
+                <button (click)="deleteField(control)" mat-menu-item class="">
+                  Delete
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div> -->
+
+  <!-- <div class="margin-auto" style="
+  border: 1px solid grey;
+  text-align: center;
+  color: #6B6B6B;
+  background: #ECE8E8;
+  border-radius: 7px;
+  ">
+    {{number}}
+  </div> -->
+  <!-- <br> -->
+
+</div>
+
+<ng-template #createTemplate>
+  <form #jsonForm="ngForm" class="py-3 px-4-5 customForm">
+    <span class="mt-2" for="fieldName">Enter Name</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Enter Name</mat-label> -->
+      <input matInput type="text" [(ngModel)]="jsonArray.fieldName" [ngModelOptions]="{standalone: true}" id="fieldName" name="fieldName" required>
+    </mat-form-field>
+
+    <span>Enter Label</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Enter Label</mat-label> -->
+      <input matInput type="text" [(ngModel)]="jsonArray.label" [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
+
+    <span>Select Field Type</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select Field Type</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.fieldType" [ngModelOptions]="{standalone: true}"
+        (selectionChange)="getFieldTypeValue($event)" [disabled]="disabledFieldValue" required>
+        <mat-option *ngFor="let field of fieldType" value="{{field.value}}">
+          {{field.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Select Validation</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select Validation</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.validation" [ngModelOptions]="{standalone: true}"
+        [disabled]="disabledValidation" (selectionChange)="getValidationTypeValue($event)">
+        <mat-option value="custom" (click)="openCustom(customContent)"> CUSTOM </mat-option>
+        <mat-option value="api" (click)="openVal(validateContent)"> API </mat-option>
+        <mat-option value="none"> NONE </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Select Triggers/Events</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select Triggers/Events</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.trigger" [ngModelOptions]="{standalone: true}"
+        (selectionChange)="getTriggers($event)" [disabled]="disabledTriggerValue">
+        <mat-option value="api" (click)="openTrig(triggerContent)"> API</mat-option>
+        <mat-option value="none"> NONE</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Select Dependent Fields</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select Dependent Fields</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.dependentFields" [ngModelOptions]="{standalone: true}"
+        [disabled]="disabledDependentFieldsValue">
+        <mat-option value="dependent" (click)="openDepen(dependentContent)"> DEPENDENT FIELDS</mat-option>
+        <mat-option value="none"> NONE</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Select Data Source</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select DataSource</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.dataSource" [ngModelOptions]="{standalone: true}"
+        [disabled]="disabledDataSourceValue">
+        <mat-option value="api" (click)="openData(dataContent)"> API</mat-option>
+        <mat-option value="gender"> GENDER</mat-option>
+        <mat-option value="boolean"> BOOLEAN</mat-option>
+        <mat-option value="none"> NONE</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Select Data Type</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Select DataType</mat-label> -->
+      <mat-select [(ngModel)]="jsonArray.dataType" [ngModelOptions]="{standalone: true}"
+        [disabled]="disabledDataType">
+        <mat-option value="alphanumeric"> ALPHANUMERIC </mat-option>
+        <mat-option value="numeric"> NUMERIC </mat-option>
+        <mat-option value="decimal"> DECIMAL </mat-option>
+        <mat-option value="none"> NONE </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span>Enter Tag</span>
+    <mat-form-field appearance="outline">
+      <!-- <mat-label>Enter Tag</mat-label> -->
+      <input matInput type="text" [(ngModel)]="jsonArray.tag" placeholder="Enter Desired Tag"
+        [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+
+    <h4>Choose Property</h4>
+    <ul class="list-style-none" style="padding-left: 0;">
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.required" [ngModelOptions]="{standalone: true}"
+          [checked]="reqChecked$ | async" (change)="toggleRequired($event)" class="me-2"> Required</mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.readonly" [ngModelOptions]="{standalone: true}"
+          [checked]="redChecked$ | async" (change)="toggleReadonly($event)" class="me-2">Read Only</mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.password" [ngModelOptions]="{standalone: true}"
+          [checked]="pasChecked$ | async" (change)="togglePassword($event)" class="me-2">Password</mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.hidden" [ngModelOptions]="{standalone: true}"
+          [checked]="hidChecked$ | async" (change)="toggleHidden($event)">Hidden</mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.amount" [ngModelOptions]="{standalone: true}"
+          [checked]="amountChecked$ | async" (change)="toggleAmount($event)">Amount Field</mat-checkbox>
+      </li>
+    </ul>
+
+    <button mat-flat-button class="w-100 no-border text-white text-button-red border-radius-1" type="button" *ngIf="create" (click)="getJsonValue()" style="font-size: 1.2rem;" [disabled]="!jsonForm.form.valid">
+      <span>Create Field</span>
+      <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    </button>
+
+    <button mat-raised-button class="w-100 no-border text-white text-button-red border-radius-1" type="button" *ngIf="update" (click)="updateJsonValue()" style="font-size: 1.2rem;">
+      <span>Update Field</span>
+      <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #viewTemplate>
+  <form [formGroup]="tellerForm" class="p-3 customForm">
+
+    <div class="">
+      <div *ngIf="number < 1" class="text-center translateY-25 font-family-name font-normal text-xl text-gray-500">
+        {{fieldMessage}}
+      </div>
+
+      <div class="col-md-12 px-4-5" *ngFor="let control of storageData" style="
+      display: grid; grid-template-columns: 90% 10%;">
+        <!-- <div style="display: grid; grid-template-columns: 90% 10%;"> -->
+        <ng-container [ngSwitch]="control.fieldType">
+          <!-- Case 1 input text -->
+          <ng-container *ngSwitchCase="'text'" class="" [class]="control?.fieldName" class="px-3">
+            <div>
+              <span>{{control.label}}</span>
+              <mat-form-field appearance="outline">
+                <!-- <mat-label>{{control.label}}</mat-label> -->
+                <input matInput type="text" [formControlName]="control?.fieldName" class="form-control">
+              </mat-form-field>
+            </div>
+          </ng-container>
+          <!-- Case 2 date -->
+          <ng-container *ngSwitchCase="'date'" class="new-grid-container" [class]="control?.fieldName" class="px-3">
+            <div>
+              <span>{{control.label}}</span>
+              <mat-form-field appearance="outline">
+                <!-- <mat-label>{{control.label}}</mat-label> -->
+                <input matInput [formControlName]="control?.fieldName" class="form-control" [matDatepicker]="dp3">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="dp3">
+                </mat-datepicker-toggle>
+                <mat-datepicker #dp3 startView="year" [startAt]="startDate" disabled="false">
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+          </ng-container>
+          <!-- Case 3 dropdown,select -->
+          <ng-container *ngSwitchCase="'dropdown'" class="new-grid-container" [class]="control?.fieldName"
+            class="px-3">
+            <div>
+              <span>{{control.label}}</span>
+              <!-- <select class="form-control">
+                  <option value="-1">Select</option>
+                  <option *ngFor="let val of control.value.split(',')" value="{{val}}">{{val}}</option>
+                </select> -->
+              <!-- <input type="date"> -->
+              <mat-form-field appearance="outline">
+                <mat-select [formControlName]="control?.fieldName" class="form-control my-select"
+                  (selectionChange)="getSelectValue($event)">
+                  <mat-option value="-1">Select</mat-option>
+                  <mat-option *ngFor="let val of control.value" [value]="val.id">{{val.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </ng-container>
+
+          <!-- Case 4 checkbox -->
+          <ng-container *ngSwitchCase="'checkbox'" class="new-grid-container" [class]="control?.fieldName"
+            class="px-3">
+            <div>
+              <span>{{control.label}}</span>
+              <p>
+                <mat-checkbox *ngFor="let val of control.value.split(',')" [formControlName]="control?.fieldName"
+                  class="form-control" name="control.value" value="{{val}}">
+                  {{val}}
+                </mat-checkbox>
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div style="margin: auto 0;">
+          <button mat-button [matMenuTriggerFor]="belowMenu" style="border: 0; background: none">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #belowMenu="matMenu">
+            <button mat-menu-item (click)="editField(control)">
+              Edit
+            </button>
+            <button (click)="deleteField(control)" mat-menu-item class="">
+              Delete
+            </button>
+          </mat-menu>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #customContent let-modal>
+  <div class="modal-header modal-headers">
+    <h4 class="modal-title">Select Regex Validation Pattern Options</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeCustom()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Trigger/Event Content &hellip;</p> -->
+    <ul class='list-style-none' style="padding: 0 3rem;">
+      <li>
+        <mat-checkbox [(ngModel)]="jsonArray.custom.email" [ngModelOptions]="{standalone: true}"
+          (change)="getEmailVal($event)"> Email </mat-checkbox>
+      </li>
+      <li>
+        <mat-checkbox (change)="getMinVal($event)"> Minlength Validation </mat-checkbox>
+      </li>
+      <mat-form-field appearance="outline" class="mt-2" *ngIf="showMin">
+        <mat-label>Enter Minlength</mat-label>
+        <input matInput type="number" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.max.minlength"
+          [ngModelOptions]="{standalone: true}" [disabled]="disabledMinlength" [hidden]="hiddenMinlength">
+      </mat-form-field>
+      <li>
+        <mat-checkbox (change)="getMaxVal($event)"> Maxlength Validation </mat-checkbox>
+      </li>
+      <mat-form-field appearance="outline" class="mt-2" *ngIf="showMax">
+        <mat-label>Enter Maxlength</mat-label>
+        <input matInput type="number" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.max.maxlength"
+          [ngModelOptions]="{standalone: true}" [disabled]="disabledMaxlength" [hidden]="hiddenMaxlength">
+      </mat-form-field>
+      <li>
+        <mat-checkbox (change)="getRegVal($event)"> Provide Regex </mat-checkbox>
+      </li>
+      <mat-form-field appearance="outline" class="mt-2" *ngIf="showReg">
+        <mat-label>Enter Regex</mat-label>
+        <input matInput type="text" (change)="getCustom($event)" [(ngModel)]="jsonArray.custom.others"
+          [ngModelOptions]="{standalone: true}" [disabled]="disabledRegex" [hidden]="hiddenRegex">
+      </mat-form-field>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="validateCustom()">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template #validateContent let-modal>
+  <div class="modal-header modal-headers">
+    <h4 class="modal-title">
+      Provide the Necessary Validation API
+    </h4>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeValidation()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Trigger/Event Content &hellip;</p> -->
+      <mat-label>Enter URL</mat-label>
+    <mat-form-field appearance="outline" class="mt-2">
+      <input matInput type="url" (change)="getValidationUrl($event)"
+        [(ngModel)]="jsonArray.validationDetails.validationUrl" [ngModelOptions]="{standalone: true}">
+      <mat-icon matSuffix></mat-icon>
+    </mat-form-field>
+    <mat-label>Enter Validation Request</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea matInput [(ngModel)]="jsonArray.validationDetails.validationRequest"
+        [ngModelOptions]="{standalone: true}" (change)="getValRequest($event)"
+        placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+    <mat-label>Enter Validation Response</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea matInput [(ngModel)]="jsonArray.validationDetails.validationResponse"
+        [ngModelOptions]="{standalone: true}" (change)="getValResponse($event)"
+        placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+
+    <!-- <div>
+      <h4>Response From Endpoint</h4>
+      <div class="grid-container">
+        <div class="grid-item">
+          <pre>{{displayValResponse}}</pre>
+        </div>
+        <div class="grid-item">
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="validateAPI()"> Submit </button>
+  </div>
+</ng-template>
+
+<ng-template #triggerContent let-modal>
+  <div class="modal-header modal-headers">
+    <h4 class="modal-title">Provide the Necessary Trigger/Events</h4>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeTrigger()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Trigger/Event Content &hellip;</p> -->
+    <mat-label>Enter URL</mat-label>
+    <mat-form-field appearance="outline" class="mt-2">
+      <input matInput type="url"
+        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+        (change)="getTriggerUrl($event)" [(ngModel)]="jsonArray.triggerDetails.triggerUrl"
+        [ngModelOptions]="{standalone: true}">
+      <mat-icon matSuffix></mat-icon>
+    </mat-form-field>
+    <div
+      *ngIf="jsonArray.triggerDetails.triggerUrl.errors?.urlPattern || jsonArray.triggerDetails.triggerUrl.errors?.required">
+      URL not Valid
+    </div>
+
+    <mat-label>Enter Trigger Request</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea matInput [(ngModel)]="jsonArray.triggerDetails.triggerRequest" [ngModelOptions]="{standalone: true}"
+        (change)="getTriggerRequest($event)" placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+
+    <mat-label>Enter Trigger Response</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea matInput [(ngModel)]="jsonArray.triggerDetails.triggerResponse"
+        [ngModelOptions]="{standalone: true}" (change)="getTriggerResponse($event)"
+        placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+
+    <!-- <div>
+      <h4>Response From Endpoint</h4>
+      <div class="grid-container">
+        <div class="grid-item">
+          <pre>{{displayTriggerResponse}}</pre>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="validateTrigger()">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template #dependentContent let-modal>
+  <div class="modal-header modal-headers">
+    <h4 class="modal-title">
+      Select Action for this Custom Field
+    </h4>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeDependentFields()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Trigger/Event Content &hellip;</p> -->
+    <div>
+      <div class="grid-item">
+
+        <div class="">
+          <div class="">
+            <h4>FIELD NAMES</h4>
+            <!-- <ol *ngFor="let field of customFields"> -->
+            <ol *ngFor="let field of dependentFields" style="padding: 0">
+              <mat-checkbox class="mb-2" [(ngModel)]="field.value"
+              [name]="field.fieldName"
+              [value]="field.value"
+              (change)="onCheckboxChange(field)">
+              {{field.label}}
+              </mat-checkbox>
+              <div *ngIf="field.value">
+                <mat-radio-group class="border-radius-1 border-grey-1" style="padding: 5px 5px 8px 5px;
+                margin: 7% 0px;">
+                  <mat-radio-button class="me-1" *ngFor="let option of radioOptions"
+                  [name]="option.name"
+                  [value]="option.value"
+                  (change)="onRadioChange(option, field.fieldName)">
+                      {{option.displayName}}
+                  </mat-radio-button>
+                </mat-radio-group>
+                <!-- <mat-checkbox [(ngModel)]="field.value"
+                  [name]="field.name"
+                  [value]="field.value"
+                  (change)="checkboxValue(field, $event)">
+                  {{field.displayName}}
+                </mat-checkbox>
+                <div *ngIf="field.value">
+                  <mat-radio-group >
+                    <mat-radio-button *ngFor="let option of radioOptions"
+                    [name]="option.name"
+                    [value]="option.value"
+                    (change)="getRadio(option, $event, field.name)"
+                    >
+                      {{option.displayName}}
+                    </mat-radio-button>
+                  </mat-radio-group> -->
+                </div>
+
+            </ol>
+          </div>
+
+        </div>
+        <h4 *ngIf="checklist">
+          No Dependent Fields Created Yet
+        </h4>
+      </div>
+    </div>
+    <button type="button" class="w-100 no-border text-white text-button-red border-radius-1 p-3 mt-2" (click)="validateDependentFields()">
+      Submit
+    </button>
+  </div>
+  <!-- <div class="modal-footer">
+
+  </div> -->
+</ng-template>
+
+<ng-template #dataContent let-modal>
+  <div class="modal-header modal-headers">
+    <h4 class="modal-title">Provide the Necessary DataSource</h4>
+
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeContent()"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Data Source Content&hellip;</p> -->
+    <mat-label>Enter Data Source URL</mat-label>
+    <mat-form-field appearance="outline" class="mt-2">
+      <input matInput type="text" (change)="getDataUrl($event)"
+        [(ngModel)]="jsonArray.dataSourceDetails.dataSourceUrl" [ngModelOptions]="{standalone: true}">
+      <mat-icon matSuffix></mat-icon>
+    </mat-form-field>
+
+    <mat-label>Enter Data Request</mat-label>
+    <mat-form-field appearance="outline" class="w-100 mt-2">
+      <textarea matInput [(ngModel)]="jsonArray.dataSourceDetails.dataSourceRequest"
+        [ngModelOptions]="{standalone: true}" (change)="getDataRequest($event)"
+        placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+
+    <mat-label>Enter Data Response</mat-label>
+    <mat-form-field appearance="outline" class="w-100 mt-2">
+      <textarea matInput [(ngModel)]="jsonArray.dataSourceDetails.dataSourceResponse"
+        [ngModelOptions]="{standalone: true}" (change)="getDataResponse($event)"
+        placeholder="{Ex. It makes me feel...}"></textarea>
+    </mat-form-field>
+    <!-- <div>
+      <h4>Response From Endpoint</h4>
+      <div class="grid-container">
+        <div class="grid-item">
+          <pre>{{displayDataResponse}}</pre>
+        </div>
+      </div>
+    </div> -->
+
+    <button type="button" class="w-100 no-border text-white text-button-red border-radius-1 p-3 mt-2" (click)="validateDependentFields()">
+      Submit
+    </button>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="validateData()">Submit</button>
+  </div> -->
+</ng-template>

@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  color: #030D1C;
+}
+
+/* th, td {
+  padding: 10px !important;
+} */
+
+mat-form-field {
+  width: 10%;
+  outline: none;
+}
+
+.tableDiv{
+  width: 90%;
+  padding: 10px;
+  margin: 30px;
+}
+.mdc-data-table__header-cell{
+  background-color:#F5F5F6 !important;
+}
+/* .text-right {
+  text-align: right !important;
+} */
+

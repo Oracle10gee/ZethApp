@@ -1,0 +1,18 @@
+<div>
+    <div class="modal-content">
+      <div>    
+      <mat-icon class="modal-icon">{{data.modalIcon}}</mat-icon>
+      </div>
+        <h3 class="modalTitle">{{data.modalHeaderTitle}}</h3>
+        <p class="modalMessage">{{data.modalMessage1}}</p>
+        <p class="modalMessage">{{data.modalMessage2}}</p>
+        <div class="modalFooter">
+          <br>
+          <br>
+          <button class="footerBtn cancelBtn"(click)="closeModal()">Cancel</button>
+          &nbsp;&nbsp;&nbsp;
+          <button class="footerBtn actionBtn" (click)="emitModalAction()">{{data.actionBtnText}}</button>
+        </div>
+    </div>
+  </div>
+  

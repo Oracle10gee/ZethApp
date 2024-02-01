@@ -1,0 +1,26 @@
+.adminContent {
+  margin: 0 !important;
+  min-height: 100vh;
+  /* min-width: 100vw; */
+}
+
+/* .adminContent::after {
+  content: '';
+  display: block;
+  height: 70px;
+} */
+
+#bodys {
+  position: relative;
+  width: 82%;
+  float: right;
+  /* margin: 0 !important; */
+  padding-top: 4%;
+  background-color: #FAFAF8;
+}
+
+#bodys .containers {
+  height: 100%;
+  background-size: cover;
+  /* background-color: antiquewhite; */
+}

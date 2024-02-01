@@ -1,0 +1,15 @@
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #E70000 !important;
+}
+
+.filterDiv{
+    border: 1px solid;
+}
+
+.genReceipt{
+    border: none;
+    border-radius: 5px;
+    background-color: #E70000;
+    color: white;
+
+}

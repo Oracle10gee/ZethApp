@@ -1,0 +1,76 @@
+.further-processing{
+    display: flex;
+    justify-content: center;
+}
+.selecte-apiCallType{
+    width: 369px;
+    height: 20px; 
+}
+/* .left-card{
+    float: left;
+    width: 45%;
+} */
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #fff;
+  }
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px;
+    padding: 0.75em 0.75em 0 0.75em;
+    border: none;
+  }
+.card{ 
+     
+    width: 55%;
+    height: 80%;
+}
+.returnFields{
+    min-height: 200px;
+    margin-bottom: 20px;
+}
+.apiDetails{
+    background: #DCEED1;
+    margin-top: -19px !important;
+    border-radius: 8px 8px 0px 0px;
+}
+.card-head{
+    width: 108%;
+    height: 78px;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    font-family: YourFontFamily;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px; 
+    border-bottom: 1px #ECE8E8 solid;
+    margin: 0px 20px 30px -18px;
+    color: #242424;
+}
+.input-field{
+    background: #FFFFFF;
+    border: 1px solid #C3C6C9;
+    border-radius: 4px;
+}
+.addBtn{
+    position: absolute;
+    width: 47px;
+    height: 22px; 
+    background-color: white;
+    float: right;
+    border: 1px solid #E70000;
+    border-radius: 8px;
+}
+.saveBtn{ 
+    width: 400px;
+    height: 50px;
+    background-color: #E70000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+.card-foot{
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+}

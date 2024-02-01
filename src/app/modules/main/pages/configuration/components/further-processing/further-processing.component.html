@@ -1,0 +1,70 @@
+<div  id="cdkk-step-content-0-0" class="px-12 further-processing">
+  <!-- <div class="left-card">
+    <label>API Call Type</label>
+    <mat-form-field appearance="fill">
+      <mat-select
+        class="select-apiCallType"
+        (selectionChange)="changeApiCallType($event.value)"
+      >
+        <mat-option [value]="option" *ngFor="let option of apiOptions">{{
+          option | titlecase
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+
+  <mat-card class="card d-flex justify-content-center">
+    <div class="">
+      <mat-card-header class="card-head apiDetails">
+        Provide the API details
+      </mat-card-header>
+    </div>
+    <form class="" [formGroup]="fgForm" (ngSubmit)="submitForm()">
+      <label>Enter URL</label>
+      <mat-form-field appearance="outline">
+        <input formControlName="url" matInput />
+      </mat-form-field>
+      <!-- <label>Returned Fields</label>
+      <mat-form-field appearance="outline">
+        <mat-select
+          formControlName="returnedFields"
+          [formControl]="multiSelect"
+          (click)="generateForm()"
+        >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-card *ngIf="showForm" class="returnFields">
+        <form class="" [formGroup]="returnedDynamicForm">
+          <button class="addBtn" (click)="addInput()">Add</button>
+          <mat-form-field
+            appearance="outline"
+            class=""
+            *ngFor="let c; in: count"
+          >
+            <input matInput formControlName="name{{ c }}" />
+          </mat-form-field>
+        </form>
+      </mat-card> -->
+
+      <label>Request</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="request" />
+      </mat-form-field>
+      <label>Response</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="response" />
+      </mat-form-field>
+      <label>API keys</label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="apikey" />
+      </mat-form-field>
+
+      <div class="card-foot">
+        <button type="submit" mat-stroked-button color="warn" class="saveBtn">
+          Save
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

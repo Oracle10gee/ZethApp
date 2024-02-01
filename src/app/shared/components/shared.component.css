@@ -1,0 +1,184 @@
+@import "../../../assets/css/customFont.css";
+
+#image {
+  background: url('../../../assets/img/Banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px !important;
+  background-position: center;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar {
+  /* position: absolute; */
+  margin-top: 4%;
+  position: fixed;
+  width: 18%;
+  float: left;
+  min-height: calc(100% - 50px);
+  height: calc(100% - 50px);
+  background: #fff;
+  /* background: #312450; */
+  font-size: 0.75em;
+  z-index: 1000;
+}
+
+.sidebar:hover {
+  /* overflow-y: scroll; */
+  overflow-y: auto;
+  left: 0;
+  /* overflow: hidden; */
+}
+
+.navs {
+  position: relative;
+  margin: 0 5%;
+  text-align: left;
+  top: 8%;
+  font-weight: bold;
+}
+
+
+.navs ul {
+  list-style: none;
+  padding-left: 1rem !important;
+
+}
+
+.navs ul li {
+  position: relative;
+}
+
+.navs ul li a {
+  line-height: 4.5em;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  transition: all ease-out 300ms;
+  font-family: YourFontFamily;
+  color: #6B6B6B;
+}
+
+.navs ul li a.active{
+  color: #242424;
+}
+
+.navs ul li a:hover {
+  color: #533E3E;
+}
+
+.arrows {
+  margin: 6px auto;
+  transform: translateY(18px);
+}
+
+.nav-item {
+  display: grid!important;
+  grid-template-columns: 17% 83%;
+}
+
+.nav-links {
+  display: grid!important;
+  grid-template-columns: 17% 25% 17%;
+}
+
+.nav-link {
+  display: grid !important;
+  grid-template-columns: 17% 83%;
+}
+
+.iconx {
+  margin: auto 7px;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+ /* MEDIA QUERIES */
+ /* MEDIA QUERIES */
+ /* MEDIA QUERIES */
+ /* MEDIA QUERIES */
+ /* MEDIA QUERIES */
+
+@media (min-width: 1200px) {
+/* @media (min-width: 1200px) { */
+
+  .sidebar {
+    margin-top: 5%;
+  }
+
+  .iconx {
+    margin: auto 12px;
+    cursor: pointer;
+  }
+
+  .arrows {
+    margin: 7px 1.6em;
+    transform: translateY(18px);
+  }
+
+  .sidebar-name {
+    margin: 0 16px;
+  }
+
+  .sidebar-normal {
+    width: 7em !important;
+    display: block;
+    margin-left: .7em;
+    font-size: 15px;
+  }
+
+}
+
+
+@media (min-width: 1350px) {
+  /* @media (min-width: 1200px) { */
+
+    .arrows {
+      margin: 7px 1.5em;
+    }
+
+    .sidebar-normal {
+      width: 7em !important;
+      display: block;
+      margin-left: 1.5em;
+      font-size: 15px;
+    }
+  }
+
+@media (min-width: 1500px) {
+  .arrows {
+    margin: 7px 1.2em;
+    transform: translateY(18px);
+  }
+
+  .sidebar-normal {
+    width: 7em !important;
+    display: block;
+    margin-left: 1.9em;
+    font-size: 15px;
+  }
+
+  .sidebar-name {
+    margin: 0 8px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .arrows {
+    margin: 7px 0.5em;
+    transform: translateY(18px);
+  }
+
+  .sidebar-normal {
+    width: 7em !important;
+    display: block;
+    margin-left: 1.9em;
+    font-size: 15px;
+  }
+}

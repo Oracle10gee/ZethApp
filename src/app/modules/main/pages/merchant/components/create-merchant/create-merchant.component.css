@@ -1,0 +1,101 @@
+
+  .merchant-card-content{
+    margin:auto;
+    width: 450px;
+    height: 500px; 
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .actionBtn{
+    width: 300px;
+    height: 40px;
+    background-color: #E70000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .actionBtn:disabled{
+    width: 300px;
+    height: 40px;
+    background-color: whitesmoke;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+  .formLabel{
+    font-size: 16px;
+    line-height: 2em;
+
+  }
+  
+  .mat-form-field{
+    width:300px;
+    height: 40px;
+  }
+
+ .mat-card-title{
+    font-weight: bolder;
+    font-size: large;
+ }
+  
+.merchantForm{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin:10%;
+}
+
+.modal-content {
+  padding: 1rem;
+  text-align: center;
+  width:306px;
+  /* Height:300px; */
+}
+
+.icon{
+  color: #E70000;
+  font-size: xxx-large;
+  width: 100px;
+  height: 50px;
+}
+
+  .mat-mdc-unelevated-button.mat-warn {
+    --mdc-filled-button-container-color: #E70000;
+    --mdc-filled-button-label-text-color: #fff;
+}
+
+.modalFooter{
+  display: inline-block;
+
+}
+
+.footerbtn{
+  width: 132px;
+  height: 37px;
+  border: 1px solid #f44336;
+  color: #f44336;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.modalTitle{
+font-size: 20px;
+font-weight: bolder;
+
+}
+
+.modalMessage{
+  font-size: 15px;
+  width: 80%;
+  margin: auto;
+}
+
+.mat-mdc-outlined-button {
+    --mdc-outlined-button-outline-color: #f44336;
+}

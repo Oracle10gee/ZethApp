@@ -1,0 +1,98 @@
+/* .grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    padding: 10px;
+  } */
+
+  
+
+  .selectField{
+    width: 400px;
+  }
+
+  /* .formContainer{
+    width: 500px;
+    height: 550px;
+    border: 1px solid #ECE8E8;
+    border-radius: 10px;
+  } */
+
+  /* .formHeader{
+    font-weight: bolder;
+    background-color: #DCEED1;
+    height: 50px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  } */
+
+  .form{
+    margin: 20px;
+    padding: 20px;
+  }
+
+  mat-error {
+    margin-top: -4% !important;
+    position: absolute !important;
+  }
+
+  .mat-form-field{
+    width: 400px;
+  }
+  .submit-btn{
+    width: 400px;
+    height: 50px;
+    background-color: #ECE8E8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: not-allowed;
+  }
+
+  .submit-btn.valid {
+    background-color: red;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+  }
+  .submit-btn.valid:hover {
+    background-color: red;
+    cursor: pointer;
+    transform: scaleX(1.03);
+  }
+
+
+  .receiptCard{
+    border-radius: 1rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mat-expansion-panel-header{
+    border: 1px solid #ECE8E8;
+    width: 400px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+    /* box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%); */
+}
+
+.mat-expansion-panel-content :ng-deep{
+    width: 400px !important;
+    border: 1px solid !important;
+    padding: 5px;
+    margin: 10px;
+}
+
+.title {
+  background-color: #DCEED1 ;
+  padding: 1.6rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+/* .cardContent {
+  margin-left: 1.5rem !important;
+} */

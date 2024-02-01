@@ -1,0 +1,58 @@
+table {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    color: #030D1C;
+  }
+
+  mat-form-field {
+    width: 10%;
+    outline: none;
+  }
+
+  mat-form-field:active {
+    width: 60%;
+    outline: none;
+  }
+
+  .tableDiv{
+    width: 90%;
+    padding: 10px;
+    margin: 30px;
+  }
+
+
+  .mat-header-cell{
+    background-color:#F5F5F6 !important;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+.table-icon{
+  border: none;
+  background: none;
+}
+
+.view-icon{
+  color: #6200EE;
+}
+
+.edit-icon{
+   color: #E48C23;
+}
+
+.delete-icon{
+  color: #E70000;
+}
+
+.tableDiv{
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+::ng-deep .mat-elevation-z8 {
+  box-shadow: none !important;
+}

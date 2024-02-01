@@ -1,0 +1,50 @@
+<div style="padding: 4em 8em 4em 4em;">
+  <span class="text-xl font-normal"> Merchant Creation</span>
+  <hr class="font-normal">
+    <mat-card class="merchant-card-content">
+      <div class="text-center">
+        <mat-card-title class="mt-4">
+            Create New Merchant
+        </mat-card-title>
+        <form [formGroup]="newMerchantForm" >
+          <div class="merchantForm" >
+            <mat-label class="formLabel">Merchant Name </mat-label>
+            <mat-form-field appearance="outline" class="inputField">
+              <input matInput formControlName="merchantName" required>
+              <mat-error>Input a merchant name</mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-label class="formLabel">Rim Number </mat-label>
+          <mat-form-field appearance="outline" class="inputField">
+            <input matInput formControlName="rimNumber" required>
+            <mat-error>Input a RIM Number</mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+
+          <!-- <button class="singlePaymentBtn"[disabled]="!singlePaymentForm.valid">Save </button> -->
+        <button mat-flat-button  class="actionBtn" [disabled]="!newMerchantForm.valid" (click)="createMerchant()">
+          <!-- &nbsp; <i class="fa fa-spinner fa-spin" ></i> -->
+      <i class="fa fa-circle-o-notch" *ngIf="loading"></i>&nbsp;
+          Create Merchant</button>
+          </div>
+        </form>
+      </div>
+</mat-card>
+
+
+<div class="modal">
+  <ng-template #modal>
+    <div class="modal-content">
+      <h3 class="modalTitle"> Merchant Created</h3>
+      <p class="modalMessage">Merchant created successfully. Merchant ID is 00123456634</p>
+      <div class="modalFooter">
+        <br>
+        <button  class="footerbtn" (click)="closeModal()">Ok</button>
+      </div>
+  </div>
+  </ng-template>
+</div>
+</div>
+

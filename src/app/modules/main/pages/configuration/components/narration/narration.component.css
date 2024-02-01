@@ -1,0 +1,149 @@
+  .fields-card {
+      height: 40vh;
+      overflow: hidden;
+  }
+
+  .fields-card:hover {
+      overflow-y: scroll;
+  }
+
+  .right-card {
+      margin-left: 2rem;
+      width: 405px;
+      height: 350px;
+  }
+
+  .mat-form-field {
+      width: 45% !important;
+  }
+
+  .select-delimeter {
+      width: 309px;
+      height: 20px;
+  }
+
+  .chip-list-wrapper {
+      height: 200px;
+  }
+
+  .saveBtn {
+    width: 400px;
+    height: 50px;
+    background-color: #E70000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  ::ng-deep .mat-chip-list-wrapper {
+      margin-top: 20px  !important ;
+  }
+
+  .card-footer, .not-selected {
+      display: flex;
+      margin-bottom: 40px;
+      justify-content: center;
+  }
+
+  .cancel {
+      margin-top: -50px;
+      margin-left: -20px;
+      height: 10px !important;
+      width: 10px;
+      color: red !important;
+      font-size: 17px;
+  }
+
+  .mat-form-field-flex {
+      width: 200% !important;
+  }
+
+  .mat-standard-chip .mat-chip-remove.mat-icon, .mat-standard-chip .mat-chip-remove .mat-icon {
+      width: 3px;
+      height: 18px;
+      font-size: 18px;
+  }
+
+  .mat-chip.mat-standard-chip {
+      background-color: white !important;
+  }
+
+  .chip {
+      border: 1px #000000 solid;
+      border-radius: 10px;
+  }
+  .delimeter-text {
+      width: 369px;
+      height: 24px;
+      font-family: YourFontFamily;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+  }
+
+  .field {
+      width: 70%;
+      border: .5px #242424 solid;
+      padding: 10px;
+      height: 40px;
+      margin: 5px;
+  }
+
+  .add {
+      margin-top: 10px;
+      font-family: YourFontFamily;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 100%;
+      text-align: center;
+      color: #0043EE;
+      cursor: pointer;
+  }
+
+  .fieldnames {
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .desired-fields {
+      font-family: YourFontFamily;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: #242424;
+  }
+
+  .card {
+      margin-top: 50px;
+  }
+
+  .selected-fields {
+      font-family: YourFontFamily;
+      font-style: normal;
+      margin-top: 15px !important;
+      margin-bottom: 0px !important;
+      font-weight: 400;
+      height: 55px !important;
+      font-size: 20px;
+      line-height: 24px;
+      color: #6200EE !important;
+  }
+
+  .card-head {
+      background-color: white;
+      width: 107%;
+      height: 68px;
+      padding-bottom: 10px;
+      font-family: YourFontFamily;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      border-bottom: 1px #ECE8E8 solid;
+      margin: 0px 20px 30px -15px;
+      color: #242424;
+  }

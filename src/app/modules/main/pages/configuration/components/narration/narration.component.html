@@ -1,0 +1,60 @@
+<div id="cdkk-step-content-0-0" class="px-12 narration">
+  <div class="">
+    <label>Select Delimeter</label><br />
+    <mat-form-field appearance="fill">
+      <mat-select
+        class="select-delimeter"
+        (selectionChange)="changeDelimeter($event.value)"
+      >
+        <mat-option [value]="option" *ngFor="let option of delimeterOptions">{{
+          option | uppercase
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <mat-card class="left-card">
+      <mat-card-header class="card-head desired-fields">
+        Add desired fields into the “Selected Field” section.
+      </mat-card-header>
+      <div class="fields-card">
+        <div class="fieldnames" *ngFor="let fieldname of fieldnames">
+          <div class="field">
+            <p>{{ fieldname }}</p>
+          </div>
+          <div>
+            <p class="add" (click)="addField(fieldname)">Add to narration</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="right-card">
+      <div class="chip-list-wrapper">
+        <mat-card-header class="card-head selected-fields">
+          Selected Fields
+        </mat-card-header>
+        <mat-chip-list #chipList>
+          <ng-container *ngFor="let select of selectData">
+            <mat-chip class="cardinal-colors chip" (click)="removeChip(select)">
+              {{ select.item }}
+              <mat-icon class="mat-chip-remove cancel">cancel</mat-icon>
+            </mat-chip>
+            {{ delimeter }}
+          </ng-container>
+        </mat-chip-list>
+        <div class="not-selected" *ngIf="selectData.length == 0">
+          <p class="mt-6">No field selected</p>
+        </div>
+      </div>
+      <div class="card-footer" *ngIf="selectData.length > 0">
+        <button mat-stroked-button class="saveBtn">Save</button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template class="" #modalContent let-mofal>
+  <!-- <app-modal></app-modal> -->
+</ng-template>

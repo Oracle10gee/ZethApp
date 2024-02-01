@@ -1,0 +1,40 @@
+<div style="padding: 4em 8em 4em 4em;">
+  <span class="text-xl font-normal"> Merchant Transaction</span>
+  <hr class="font-normal">
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="All Transactions">
+      <app-table
+      [tableData]="transactions"
+      [tableColumns]="transactionsTableColumns"
+      [isFilterable]="true"
+      [isPageable]="true"
+      [paginationSizes]="[2,4,6]"
+      [defaultPageSize]="4"
+      [rowActionIcon]="'format_align_center'"
+      [viewActionText]="'View Transaction'"
+      [viewActionIcon]="'visibility'"
+      (viewAction) ="onView()"
+      >
+      </app-table>
+    </mat-tab>
+    <mat-tab label="Reversal Request">Reversal Request</mat-tab>
+  </mat-tab-group>
+
+
+
+
+
+</div>
+<!-- (rowAction)="" -->
+
+<div class="invoiceModal">
+  <ng-template #invoiceModal>
+    <div class="grid-container" style="grid-gap: 25px">
+      <h3>Transaction Details</h3>
+      <button class="genReceipt">Generate Receipt</button>
+
+    </div>
+  </ng-template>
+
+</div>

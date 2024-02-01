@@ -1,0 +1,171 @@
+@import "../../../../../../../assets/css/customFont.css";
+
+.font-family-name {
+  font-family: YourFontFamily !important;
+}
+
+::ng-deep.mat-step-header .mat-step-icon-selected {
+  background-color: #E70000!important;
+  /* padding: 20%;
+  margin: -5% 0; */
+}
+
+
+::ng-deep .mat-step-header[aria-selected="true"]:hover  {
+  background-color: rgba(0,0,0,.2);
+  border-radius: 10px;
+}
+
+
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-selected {
+  color: #E70000!important;
+}
+
+::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
+  padding: 10px 10px;
+}
+
+::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:last-child)::after {
+  top: 20px
+}
+
+::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header:not(:first-child)::before {
+  top: 20px
+}
+
+::ng-deep .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  top: 20px;
+}
+
+.next1 {
+  background-color: #fff;
+  padding: 0 2% 0 2%;
+  /* margin-bottom: -70%; */
+  /* bottom: -5em; */
+  position: relative;
+}
+
+.fixed-state {
+  padding-bottom: 4px;
+  background: #FAFAF8;
+  width: 75%;
+  z-index: 1000;
+  position: fixed;
+}
+
+
+@media (min-width: 1200px) {
+  .fixed-state {
+    top: 3.6em;
+  }
+
+  ::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    background: #FAFAF8;
+    width: 75%;
+    z-index: 1000;
+    position: fixed;
+    top: 9em;
+  }
+
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 22%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1275px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 20%;
+    top: 3%;
+    /* position: relative; */
+  }
+}
+
+@media (min-width: 1325px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 20%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1375px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 18%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1425px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 15%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1475px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 15%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1525px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 15%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1575px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 15%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1625px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 13%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1675px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 13%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1725px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 14%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1775px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 14%;
+    top: 3%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1825px) {
+  ::ng-deep #cdkk-step-content-0-0 {
+    margin-top: 12%;
+    top: 3%;
+    position: relative;
+  }
+}

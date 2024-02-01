@@ -1,0 +1,5 @@
+@font-face {
+  font-family: YourFontFamily;
+  /* src: url("/assets/font/yourFont.otf") format("truetype"); */
+  src: url("/assets/fonts/myriad/Myriad_Pro_Regular.ttf") format("truetype");
+}

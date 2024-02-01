@@ -1,0 +1,40 @@
+<!-- padding: 25px 50px 75px 100px;
+top padding is 25px
+right padding is 50px
+bottom padding is 75px
+left padding is 100px -->
+<div style="padding: 4em 8em 4em 4em;">
+  <div class="" style="display: grid; grid-template-columns: 1fr 1fr; width: 100%;">
+    <div>
+      <h3 class="font-normal text-xl"> Welcome {{userName}},</h3>
+    </div>
+    <div>
+      <button class="text-button-red border-radius-1 no-border float-right" style="padding: 5px 2rem;">
+        <a class="no-text-deco text-white text-base" [routerLink]="['/main/merchant/create-merchant']">
+          Add New Merchant
+        </a>
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-4" style="width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 15px;">
+    <app-card [CardClass]="'text-gray-500 no-text-deco'" [CardTitle]="'Total Number of Merchants'" [CardNumber]="1500"
+      [CardLink]="'/main/merchant/manage-merchant'" [CardLinkTitle]="'View all merchants'">
+    </app-card>
+
+    <app-card [CardClass]="'text-gray-500 no-text-deco'" [CardTitle]="'Number of successful transactions'"
+      [CardNumber]="1100" [CardLink]="'/main/transaction/transaction'" [CardLinkTitle]="'View successful transactions'">
+    </app-card>
+
+    <app-card [CardClass]="'text-gray-500 no-text-deco'" [CardTitle]="'Number of failed transactions'"
+      [CardNumber]="250" [CardLink]="'/main/transaction/transaction'" [CardLinkTitle]="'View failed transactions'">
+    </app-card>
+  </div>
+  <!-- <app-normal-table></app-normal-table> -->
+
+  <div class="mt-4" style="width: 100%; position: relative;">
+    <canvas id="lineChart" style="width: 100%; height: 400px;"></canvas>
+  </div>
+
+
+</div>

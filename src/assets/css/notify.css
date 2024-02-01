@@ -1,0 +1,64 @@
+@import url(https://fonts.googleapis.com/css?family=Old+Standard+TT:400,700);
+@import "../css/customFont.css";
+
+[data-notify="container"][class*="alert-pastel-"] {
+  background-color: rgb(255, 255, 255);
+  border-width: 0px;
+  border-left: 15px solid rgb(255, 240, 106);
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.3);
+  font-family: YourFontFamily, 'Old Standard TT', serif;
+  letter-spacing: 1px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  /* transform: translateY(45em); */
+  /* margin-top: 47em; */
+  position: absolute !important;
+  top: 85% !important;
+  /* transition: all 1.5s linear !important; */
+  /* transition: all 1.5s ease-in-out 2s; */
+  /* bottom: 10% !important; */
+  z-index: 3000 !important;
+
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: slide 0.5s forwards !important;
+  animation-delay: 0.5s !important;
+}
+
+@-webkit-keyframes slide {
+  100% { right: 0; }
+}
+
+@keyframes slide {
+  100% { right: 0; }
+}
+
+[data-notify="container"].alert-pastel-info {
+  border-left-color: rgb(255, 179, 40);
+}
+
+[data-notify="container"].alert-pastel-danger {
+  border-left-color: rgb(255, 103, 76);
+  margin-bottom: 7%;
+  /* transform: translateY(36em);
+  z-index: 3000 !important; */
+}
+
+[data-notify="container"].alert-pastel-success {
+  border-left-color: rgb(17, 167, 4);
+}
+
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="title"] {
+  color: rgb(80, 80, 57);
+  display: block;
+  font-weight: 700;
+  /* margin-bottom: 5px; */
+  margin-bottom: 6%;
+}
+
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="message"] {
+  font-weight: 400;
+  margin-bottom: 5px;
+}

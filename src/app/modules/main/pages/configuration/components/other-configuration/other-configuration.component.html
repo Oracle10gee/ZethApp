@@ -1,0 +1,156 @@
+<!-- <p>other-configuration works!</p> -->
+<div id="cdkk-step-content-0-0" class="row">
+  <div class="col-md-4">
+    <h3>Other Configurations</h3>
+    <!-- <mat-label>Select Configurations</mat-label> -->
+    <mat-form-field appearance="outline">
+      <mat-select (selectionChange)="getOtherConfig($event)">
+        <mat-option *ngFor="let config of configs" [value]="config.value">
+          {{ config.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-5">
+    <div *ngIf="configSelected === 'config-0'">
+      <p></p>
+      <div class="w-75 mt-2-8 border-radius-1 px-3 pt-3 pb-6 border-grey-1">
+        <h3>Do you want to allow reversal</h3>
+        <div class="border-grey-1 border-radius-1">
+          <!-- <mat-radio-group aria-label="Select an option" [(ngModel)]="otherConfig.reversal.allowReversal" [ngModelOptions]="{standalone: true}"
+        class="example-radio-group">
+          <mat-radio-button class="example-radio-button" *ngFor="let options of radioOptions"
+            [name]="options.name" [value]="options.value" (change)="getRadio(options, $event)">
+            {{options.displayName}}
+            </mat-radio-button>
+        </mat-radio-group> -->
+          <mat-checkbox
+            [(ngModel)]="otherConfig.reversal.allowReversal"
+            [ngModelOptions]="{ standalone: true }"
+            [checked]="reqChecked$ | async"
+            (change)="toggleRequired($event)"
+            class="me-2 p-2"
+          >
+            Allow Reversal
+          </mat-checkbox>
+        </div>
+
+        <div class="text-center">
+          <button
+            class="my-4 py-2 no-border text-white w-50 text-center border-radius-1 text-button-red"
+            
+          >
+            <span> Save </span>
+            <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="configSelected === 'config-1'">
+      <div class="w-75 mt-2-8 border-radius-1 px-2 border-grey-1">
+        <div class="px-3 pt-8 pb-5">
+          <span>Title</span>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="otherConfig.notification.title"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </mat-form-field>
+
+          <span>Message</span>
+          <mat-form-field appearance="outline">
+            <textarea
+              matInput
+              [(ngModel)]="otherConfig.notification.message"
+              [ngModelOptions]="{ standalone: true }"
+            ></textarea>
+          </mat-form-field>
+
+          <button
+            class="mt-2 px-5 py-2 no-border text-white w-100"
+            style="border-radius: 5px; background-color: rgba(239, 68, 68)"
+            (click)="submitNotificationContent()"
+          >
+            <span> Save </span>
+            <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <button
+      class="mt-5 py-2 no-border text-white w-100"
+      style="border-radius: 5px; background-color: rgba(239, 68, 68)"
+      (click)="openConfig(dependentContent)"
+    >
+      <span> Add other configuration </span>
+      <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    </button>
+  </div>
+
+  <!-- <app-buttons></app-buttons> -->
+
+
+  <!-- <div *ngIf="configSelected === 'config-2'">
+    <div class="w-75 mt-2-8 border-radius-1 px-2 border-grey-1">
+      <div class="px-3 pt-8 pb-5">
+        <span> Show Content </span>
+      </div>
+    </div>
+  </div> -->
+</div>
+<ng-template #dependentContent>
+  <div class="modal-header">
+    <h4 class="modal-title"></h4>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+    <button type="button" class="btn-close" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <!-- <p>Trigger/Event Content &hellip;</p> -->
+    <div>
+      <div class="grid-item">
+        <div class="">
+          <div class="">
+            <h4 class="text-center"><b>Add Other configuration</b></h4>
+            <!-- <ol *ngFor="let field of customFields"> -->
+          </div>
+          <div class="p-10">
+            <mat-form-field appearance="outline">
+              <mat-label>Configuration Name</mat-label>
+              <input matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Configuration Type</mat-label>
+              <mat-select>
+                <mat-option value="one">Text Field</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div>
+              <button
+                class="mt-5 px-5 py-2 no-border text-white w-100"
+                style="
+                  border-radius: 5px;
+                  background-color: rgba(239, 68, 68);
+                  height: 2rem !important;
+                "
+              >
+                <span> Add other configuration </span>
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button type="button" class="w-100 no-border text-white text-button-red border-radius-1 p-3 mt-2" (click)="validateDependentFields()">
+      Submit
+    </button> -->
+  </div>
+  <!-- <div class="modal-footer">
+
+  </div> -->
+</ng-template>

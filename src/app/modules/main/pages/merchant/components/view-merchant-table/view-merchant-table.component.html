@@ -1,0 +1,23 @@
+<div style="padding: 4em 8em 4em 4em;">
+  <span class="text-xl font-normal"> List of Merchants </span>
+  <hr class="font-normal">
+<app-table
+[tableData]="merchants"
+[tableColumns]="merchantsTableColumns"
+[isFilterable]="true"
+[isPageable]="true"
+[paginationSizes]="[2,4,6]"
+[defaultPageSize]="4"
+[rowActionIcon]="'format_align_center'"
+[viewActionText]="'View'"
+[editActionText]="'Edit Configuration'"
+[deleteActionText]="'Deactivate'"
+[viewActionIcon]="'visibility'"
+[editActionIcon]="'description'"
+[deleteActionIcon]="'delete'"
+(viewAction) ="onView()"
+(editAction) = "onEdit()"
+(deleteAction) = "deactivateMerchant()"
+>
+</app-table>
+</div>

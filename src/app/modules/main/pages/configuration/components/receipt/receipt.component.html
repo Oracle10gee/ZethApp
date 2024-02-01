@@ -1,0 +1,385 @@
+<div id="cdkk-step-content-0-0" class="grid-container" style="grid-gap: 25px">
+  <div>
+    <h3>Select Receipt Type</h3>
+    <mat-form-field appearance="outline" class="selectField">
+      <mat-select (selectionChange)="getReceiptType($event)">
+        <mat-option *ngFor="let receipt of receipts" [value]="receipt.value">
+          {{ receipt.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <!-- API receipt config -->
+    <div *ngIf="receiptSelected === 'receipt-0'" class="mt-2-8">
+      <mat-card class="receiptCard">
+        <mat-card-title class="title"
+          ><b>Provide the API Details</b></mat-card-title
+        >
+        <mat-card-content class="cardContent">
+          <form
+            class="form"
+            [formGroup]="ApiDetailsForm"
+            (ngSubmit)="onApiSubmit()"
+          >
+            <div>
+              <mat-label>Enter URL</mat-label>
+              <mat-form-field appearance="outline">
+                <input type="url" matInput formControlName="enterUrl" />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                ApiDetailsForm.controls['enterUrl'].invalid &&
+                ApiDetailsForm.controls['enterUrl'].touched
+              "
+            >
+              <mat-error> Please enter a valid URL. </mat-error>
+            </div>
+            <div class="mt-3">
+              <mat-label>Merchant ID</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="merchantId" />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                ApiDetailsForm.controls['merchantId'].invalid &&
+                ApiDetailsForm.controls['merchantId'].touched
+              "
+            >
+              <mat-error> Merchant ID should be a number. </mat-error>
+            </div>
+
+            <div class="mt-3">
+              <mat-label>Secret Key</mat-label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="secretKey" />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                ApiDetailsForm.controls['secretKey'].invalid &&
+                ApiDetailsForm.controls['secretKey'].touched
+              "
+            >
+              <mat-error> Please enter a valid secret key. </mat-error>
+            </div>
+
+            <div class="mt-3">
+              <mat-label>Request</mat-label>
+              <mat-form-field appearance="outline">
+                <textarea
+                  matInput
+                  placeholder="Enter request"
+                  rows="5"
+                  cols="50"
+                  formControlName="request"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <div
+              class="mb-3"
+              *ngIf="
+                ApiDetailsForm.controls['request'].invalid &&
+                ApiDetailsForm.controls['request'].touched
+              "
+            >
+              <mat-error> Please enter a valid request. </mat-error>
+            </div>
+
+            <div class="mt-3">
+              <mat-label>Response</mat-label>
+              <mat-form-field appearance="outline">
+                <textarea
+                  matInput
+                  placeholder="Enter response"
+                  rows="5"
+                  cols="50"
+                  formControlName="response"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <div
+              class="mb-3"
+              *ngIf="
+                ApiDetailsForm.controls['response'].invalid &&
+                ApiDetailsForm.controls['response'].touched
+              "
+            >
+              <mat-error> Please enter a valid response. </mat-error>
+            </div>
+
+            <button
+              [class.valid]="ApiDetailsForm.valid"
+              class="submit-btn"
+              type="submit"
+              [disabled]="!ApiDetailsForm.valid"
+            >
+              Submit
+            </button>
+          </form>
+          <div
+            *ngIf="
+              ApiDetailsForm.errors &&
+              (ApiDetailsForm.dirty || ApiDetailsForm.touched)
+            "
+          >
+            <mat-error
+              *ngFor="let error of getAPIFormValidationErrors() | keyvalue"
+            >
+              {{ error.value }}
+            </mat-error>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Standard Receipt Config -->
+    <div *ngIf="receiptSelected === 'receipt-1'" class="mt-2-8">
+      <mat-card class="receiptCard">
+        <mat-card-title style="padding: 1.5rem !important" class="title"
+          ><b>Standard Receipt Setup</b></mat-card-title
+        >
+        <mat-card-content class="cardContent">
+          <form
+            class="form"
+            [formGroup]="StandardReceipt"
+            (ngSubmit)="onStandardSubmit()"
+          >
+            <div>
+              <mat-label>Receipt Title</mat-label>
+              <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="receiptTitle" />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                StandardReceipt.controls['receiptTitle'].invalid &&
+                StandardReceipt.controls['receiptTitle'].touched
+              "
+            >
+              <mat-error> Please enter a valid Receipt Title </mat-error>
+            </div>
+            <div class="mt-3">
+              <mat-label>Custom Field</mat-label>
+              <mat-form-field appearance="outline" class="selectField">
+                <mat-select formControlName="customField" multiple>
+                  <mat-option
+                    *ngFor="let field of fieldsData"
+                    [value]="field.fieldName"
+                  >
+                    {{ field.fieldName }} - {{ field.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                StandardReceipt.controls['customField'].invalid &&
+                StandardReceipt.controls['customField'].touched
+              "
+            >
+              <mat-error> Please select preferred custom field </mat-error>
+            </div>
+            <div class="mt-3" [hidden]="selectedOption === 'no'">
+              <mat-label>Include Further Processing return fields</mat-label>
+              <mat-form-field appearance="outline" class="selectField">
+                <mat-select [(ngModel)]="fieldsData" (selectionChange)="onOptionSelected($event.value)" >
+                  <!-- [ngModelOptions]="{standalone: true}" -->
+                  <mat-option *ngFor="let option of furtherProcessingField" [value]="option.value">
+                    {{ option.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="selectedOption === 'yes' && fieldsData">
+                <mat-option
+                  *ngFor="let field of fieldsData"
+                  [value]="field.fieldName"
+                >
+                  {{ field.fieldName }} - {{ field.label }}
+                </mat-option>
+              
+            </div>
+            
+            <!-- <div class="mt-3">
+              <mat-label>Bar Code Setup</mat-label>
+              <mat-form-field appearance="outline" class="selectField">
+                <mat-select>
+                  <mat-option> </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div> -->
+            <div class="mt-3">
+              <mat-label>Instruction</mat-label>
+              <mat-form-field appearance="outline">
+                <textarea
+                  formControlName="instruction"
+                  matInput
+                  placeholder="Enter message to be displayed in receipt"
+                  rows="5"
+                  cols="50"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                StandardReceipt.controls['instruction'].invalid &&
+                StandardReceipt.controls['instruction'].touched
+              "
+            >
+              <mat-error> Please enter Instruction </mat-error>
+            </div>
+            <div class="mt-3">
+              <mat-label>Upload Logo</mat-label>
+              <mat-form-field class="columns">
+                <mat-label *ngIf="selectedStandardFiles; else newFile">{{
+                  selectedStandardFiles.item(0).name
+                }}</mat-label>
+                <ng-template #newFile>
+                  <mat-label>Choose file</mat-label>
+                </ng-template>
+                <input matInput disabled />
+                <button mat-icon-button matSuffix (click)="fileInput.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input
+                  hidden
+                  (change)="selectStandardFile($event)"
+                  #fileInput
+                  type="file"
+                  id="file"
+                  formControlName="uploadLogo"
+                />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                StandardReceipt.controls['uploadLogo'].invalid &&
+                StandardReceipt.controls['uploadLogo'].touched
+              "
+            >
+              <mat-error> Please upload logo</mat-error>
+            </div>
+
+            <button
+              class="submit-btn"
+              [class.valid]="StandardReceipt.valid"
+              class="submit-btn"
+              type="submit"
+              [disabled]="!StandardReceipt.valid"
+            >
+              Submit
+            </button>
+          </form>
+          <div
+            *ngIf="
+              StandardReceipt.errors &&
+              (StandardReceipt.dirty || StandardReceipt.touched)
+            "
+          >
+            <mat-error
+              *ngFor="let error of getStandardValidationErrors() | keyvalue"
+            >
+              {{ error.value }}
+            </mat-error>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Custom Receipt Config -->
+    <div *ngIf="receiptSelected === 'receipt-2'" class="mt-2-8">
+      <mat-card class="receiptCard">
+        <mat-card-title style="padding: 1.5rem !important" class="title"
+          ><b>Custom Receipt Setup</b></mat-card-title
+        >
+        <mat-card-content class="cardContent">
+          <form
+            class="form"
+            [formGroup]="CustomReceiptForm"
+            (ngSubmit)="onCustomSubmit()"
+          >
+            <div class="mt-3">
+              <mat-label>Upload Template</mat-label>
+              <mat-form-field class="columns">
+                <mat-label *ngIf="selectedCustomFiles; else newFile">{{
+                  selectedCustomFiles.item(0).name
+                }}</mat-label>
+                <ng-template #newFile>
+                  <mat-label>Choose file</mat-label>
+                </ng-template>
+                <input matInput disabled />
+                <button mat-icon-button matSuffix (click)="fileInput.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input
+                  hidden
+                  (change)="selectCustomFile($event)"
+                  #fileInput
+                  type="file"
+                  id="file"
+                  formControlName="uploadTemplate"
+                  accept=".html"
+                />
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                CustomReceiptForm.controls['uploadTemplate'].invalid &&
+                CustomReceiptForm.controls['uploadTemplate'].touched
+              "
+            >
+              <mat-error> Please upload template</mat-error>
+            </div>
+            <div class="mt-3">
+              <mat-label>Custom Field</mat-label>
+              <mat-form-field appearance="outline" class="selectField">
+                <mat-select formControlName="customField" multiple>
+                  <mat-option
+                    *ngFor="let field of fieldsData"
+                    [value]="field.fieldName"
+                  >
+                    {{ field.fieldName }} - {{ field.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div
+              *ngIf="
+                CustomReceiptForm.controls['customField'].invalid &&
+                CustomReceiptForm.controls['customField'].touched
+              "
+            >
+              <mat-error> Please select preferred custom field </mat-error>
+            </div>
+
+            <button
+              class="submit-btn"
+              [class.valid]="CustomReceiptForm.valid"
+              class="submit-btn"
+              type="submit"
+              [disabled]="!CustomReceiptForm.valid"
+            >
+              Submit
+            </button>
+          </form>
+          <div
+            *ngIf="
+              CustomReceiptForm.errors &&
+              (CustomReceiptForm.dirty || CustomReceiptForm.touched)
+            "
+          >
+            <mat-error
+              *ngFor="let error of getCustomValidationErrors() | keyvalue"
+            >
+              {{ error.value }}
+            </mat-error>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

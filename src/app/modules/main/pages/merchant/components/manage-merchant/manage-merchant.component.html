@@ -1,0 +1,117 @@
+<div style="padding: 4em 8em 4em 4em;">
+  <span class="text-xl font-normal"> Merchant Details</span>
+  <hr class="font-normal">
+
+  <div class="grid-container">
+    <div class="main-column">
+      <div class="top-div">
+        <div class="top-space">
+          <p class="top-content">
+            <img src="./../../../../../../../assets/img/dangoteGp.png" class="merchantIcon">
+            <span style="padding: 10px;">
+              <p style="font-weight:bolder;">Dangote Group</p>
+              <p style="color: #6b6b6b;">ID: 1234567890</p>
+            </span>
+          </p>
+          <div></div>
+          <div class="configStatus">
+            <p>Configuration Status</p>
+            <p>40% Complete</p>
+            <mat-progress-bar
+            [mode]="mode"
+            [value]="value">
+        </mat-progress-bar>
+          </div>
+        </div>
+      </div>
+      <div>
+        <mat-tab-group animationDuration="0ms">
+          <div class="tab-div">
+            <mat-tab label="Configuration">
+              <br>
+              <mat-card class="tab-card">
+                <div class="tab-content">
+                  <ol *ngFor="let detail of configurationDetails">
+                    <mat-accordion  multi [(ngModel)]="detail.fieldName" >
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <i class="fa fa-check-circle" aria-hidden="true" style="color:#6200EE; font-size: 1.5em;"></i>
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            {{detail.displayName}} &nbsp; {{detail.counter}}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ol *ngFor=" let value of detail.values">
+                          <div class="expendedContent">
+                            <mat-accordion  multi >
+                              <mat-expansion-panel> 
+                                <mat-expansion-panel-header>
+                                  <mat-panel-description>
+                                    <!-- {{value.displayValue}} -->
+                                  </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <h3>Update</h3>
+                                <div class="expendedContent">
+                                </div>
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </div>
+                        </ol>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </ol>
+                </div> 
+              </mat-card>
+   
+              </mat-tab>
+            <mat-tab label="Transaction">
+              <div>
+          
+                  <br>
+                  <app-table
+                      style="padding: 0px !important; margin: 0px !important;"
+                      [tableData]="transactionData"
+                      [tableColumns]="transactionTableColumns"
+                      [isFilterable]="true"
+                      [isPageable]="false"
+                      [paginationSizes]="[2,4,6]"
+                      [defaultPageSize]="4"
+
+
+                      >
+                      </app-table>
+
+              </div> 
+            </mat-tab>
+            <!-- <mat-tab label="Payment">
+              <div class="tab-content">
+                <mat-card class="content-card">
+                  Payment
+                </mat-card>
+              </div></mat-tab> -->
+          </div>   
+        </mat-tab-group>
+      </div>
+    </div> 
+    <div>
+      <mat-card class="merchantInfoCard">
+        <ol *ngFor="let detail of merchantDetails">
+          <p class="merchantInfo">
+           <mat-icon>{{detail.icon}}</mat-icon>
+            <span style="padding: 7px;">
+              <p style="color: #6b6b6b;">{{detail.label}}</p>
+              <p >{{detail.value}}</p>
+            </span>
+          </p>
+        </ol> 
+      </mat-card>
+      <br>
+
+    
+    </div> 
+  </div>
+
+
+
+</div>

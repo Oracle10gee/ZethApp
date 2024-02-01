@@ -1,0 +1,42 @@
+<div class="loginContainer">
+  <div class="grid-container">
+    <div class="loginFormContainer">
+      <mat-card class="loginForm">
+        <div class="text-center formHeader">
+          <mat-card-title>
+            <img src="../../assets/img/Zethlogo.svg" class="logo">
+          </mat-card-title>
+        </div>
+        <br>
+          <form class='mt-2' (ngSubmit)="getJsonValue()">
+          <div class="form-field">
+            <h1 class='fw-bold mt-2' style="font-weight: bold;">
+              Admin Login
+            </h1>
+            <mat-label>Username</mat-label>
+            <mat-form-field appearance="outline" class='col-10 mt-2'>
+              <input matInput type="email" #email="ngModel" id="email" [(ngModel)]="credentials.email"
+                [ngModelOptions]="{standalone: true}" required>
+            </mat-form-field>
+
+            <mat-label>Pin/Token</mat-label>
+            <mat-form-field appearance="outline" class='col-10 mt-2'>
+              <input matInput [type]="hide ? 'text' : 'password'" type="password" #password="ngModel" id="password"
+                [(ngModel)]="credentials.password" [ngModelOptions]="{standalone: true}" required autocomplete="false" />
+              <i mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </i>
+            </mat-form-field>
+
+            <button class='loginBtn' type="submit">
+              Login
+              &nbsp; <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+    <div class="loginImage">
+    </div>
+  </div>
+</div>
